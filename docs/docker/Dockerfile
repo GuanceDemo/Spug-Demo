@@ -19,7 +19,8 @@ RUN pip3 install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ \
     GitPython==3.0.8 \
     python-ldap==3.4.0 \
     openpyxl==3.0.3 \
-    user_agents==2.2.0
+    user_agents==2.2.0 \
+    ddtrace==1.16.0
 
 RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8
 ENV LANG=en_US.UTF-8

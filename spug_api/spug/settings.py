@@ -29,7 +29,7 @@ SECRET_KEY = 'vk0do47)egwzz!uk49%(y3s(fpx4+ha@ugt-hcv&%&d@hwr&p7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -76,7 +76,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://127.0.0.1:32005/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -87,7 +87,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [("127.0.0.1", 32005)],
             "capacity": 1000,
             "expiry": 120,
         },
@@ -140,3 +140,112 @@ try:
     from spug.overrides import *
 except ImportError:
     pass
+
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+
+# 日志配置
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': FORMAT,
+            'style': '{',
+        },
+        'simple': {
+            'format': FORMAT,
+            'style': '{',
+        },
+        "default": {
+            "format": FORMAT,
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'default'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+            'when': "D",
+            'interval': 1,
+            'formatter': 'default'
+        },
+        "request": {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/request.log'),
+            'formatter': 'default'
+        },
+        "server": {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/server.log'),
+            'formatter': 'default'
+        },
+        "root": {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/root.log'),
+            'formatter': 'default'
+        },
+ 
+        "db_backends": {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
+            'formatter': 'default'
+        },
+        "autoreload": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
+            'formatter': 'default'
+        }
+    },
+    'loggers': {
+        # 应用中自定义日志记录器
+        'mylogger': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+            'propagate': True,
+        },
+        "django": {
+            "level": "DEBUG",
+            "handlers": ["console", "file"],
+            'propagate': False,
+        },
+        "django.request": {
+            "level": "DEBUG",
+            "handlers": ["request"],
+            'propagate': False,
+        },
+        "django.server": {
+            "level": "DEBUG",
+            "handlers": ["server"],
+            'propagate': False,
+        },
+        "django.db.backends": {
+            "level": "DEBUG",
+            "handlers": ["db_backends"],
+            'propagate': False,
+        },
+        "django.utils.autoreload": {
+            "level": "INFO",
+            "handlers": ["autoreload"],
+            'propagate': False,
+        }
+    },
+    'root': {
+        "level": "DEBUG",
+        "handlers": ["root"],
+    }
+}

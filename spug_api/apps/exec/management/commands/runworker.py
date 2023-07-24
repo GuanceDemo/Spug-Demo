@@ -14,12 +14,24 @@ from threading import Thread
 import logging
 import time
 import os
+from ddtrace import patch, tracer
 
 EXEC_WORKER_KEY = settings.EXEC_WORKER_KEY
 MONITOR_WORKER_KEY = settings.MONITOR_WORKER_KEY
 SCHEDULE_WORKER_KEY = settings.SCHEDULE_WORKER_KEY
 
-logging.basicConfig(level=logging.WARNING, format='%(asctime)s %(message)s')
+os.environ["DD_SERVICE"] = "Python-App"    # 设置服务名
+os.environ["DD_ENV"] = "Testing"          # 设置环境名
+os.environ["DD_VERSION"] = "V1.1"         # 设置版本号
+os.environ["DD_LOGS_INJECTION"] = "true"  # 开启log注入
+
+
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+          '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+          '- %(message)s')
+
+
+logging.basicConfig(level=logging.WARNING, format=FORMAT)
 
 
 class Worker:
