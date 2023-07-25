@@ -33,7 +33,7 @@ COPY ssh_config /etc/ssh/
 COPY spug.ini /etc/supervisord.d/
 COPY redis.conf /etc/
 COPY entrypoint.sh /
-COPY /data/spug/src /data/spug
+COPY /data/spug/src/ /data/spug/
 
 
 
