@@ -24,7 +24,7 @@ print(os.environ["DD_AGENT_PORT"],)
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
           '- %(message)s')
-logging.basicConfig(level=logging.WARNING, format=FORMAT)
+logging.basicConfig(level=logging.info, format=FORMAT)
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'spug.settings')
