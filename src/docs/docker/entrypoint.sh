@@ -7,9 +7,7 @@ if [ -e /root/.bashrc ]; then
 fi
 
 if [ ! -d /data/spug/spug_api ]; then
-    mkdir -p /data/spug
-    cd /data/spug
-    git clone  https://github.com/GuanceDemo/spug-demo.git
+    git clone  https://github.com/GuanceDemo/spug-demo.git /data/spug
     #curl -o web.tar.gz https://cdn.spug.cc/spug/web_${SPUG_DOCKER_VERSION}.tar.gz
     #tar xf web.tar.gz -C /data/spug/spug_web/
     #rm -f web.tar.gz
