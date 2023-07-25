@@ -7,11 +7,13 @@ if [ -e /root/.bashrc ]; then
 fi
 
 if [ ! -d /data/spug/spug_api ]; then
-    git clone -b $SPUG_DOCKER_VERSION https://github.com/GuanceDemo/spug-demo.git /data/spug
+    mkdir -p /data/spug
+    cd /data/spug
+    git clone  https://github.com/GuanceDemo/spug-demo.git
     #curl -o web.tar.gz https://cdn.spug.cc/spug/web_${SPUG_DOCKER_VERSION}.tar.gz
     #tar xf web.tar.gz -C /data/spug/spug_web/
     #rm -f web.tar.gz
-    cp -rf /data/spug/src data/spug
+    cp -rf /data/spug/src /data/spug
     SECRET_KEY=$(< /dev/urandom tr -dc '!@#%^.a-zA-Z0-9' | head -c50)
     cat > /data/spug/spug_api/spug/overrides.py << EOF
 import os
