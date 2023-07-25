@@ -2,6 +2,17 @@
 #
 set -e
 
+
+#开启防火墙
+systemctl start firewalld
+#放行443端口
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+#重新加载防火墙
+firewall-cmd --reload
+#查看是否放行成功
+firewall-cmd --zone=public --query-port=443/tcp
+
+
 if [ -e /root/.bashrc ]; then
     source /root/.bashrc
 fi
