@@ -38,6 +38,6 @@ DATABASES = {
 }
 EOF
 fi
-###git sssss
+###git sssss2
 
 exec supervisord -c /etc/supervisord.conf
