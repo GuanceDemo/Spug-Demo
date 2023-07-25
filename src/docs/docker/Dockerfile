@@ -27,13 +27,13 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 RUN echo -e '\n# Source definitions\n. /etc/profile\n' >> /root/.bashrc
 RUN mkdir -p /data/repos
-COPY init_spug /usr/bin/
-COPY nginx.conf /etc/nginx/
-COPY ssh_config /etc/ssh/
-COPY spug.ini /etc/supervisord.d/
-COPY redis.conf /etc/
-COPY entrypoint.sh /
-COPY /spug/src/ /data/spug/
+COPY /src/doc/docker/init_spug /usr/bin/
+COPY /src/doc/docker/nginx.conf /etc/nginx/
+COPY /src/doc/docker/ssh_config /etc/ssh/
+COPY /src/doc/docker/spug.ini /etc/supervisord.d/
+COPY /src/doc/docker/redis.conf /etc/
+COPY /src/doc/docker/entrypoint.sh /
+COPY /src/ /data/spug/
 
 
 
