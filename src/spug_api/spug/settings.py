@@ -18,6 +18,10 @@ import os
 import re
 from ddtrace import tracer
 
+redis_host = os.environ.get('REDIS_HOST')
+redis_port = os.environ.get('REDIS_POST')
+redis_url = "redis://"+ redis_host + ":" + + redis_port + "/1"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -77,7 +81,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:32005/1",
+        "LOCATION": redis_url,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -88,7 +92,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 32005)],
+            "hosts": [(redis_host, redis_port)],
             "capacity": 1000,
             "expiry": 120,
         },
