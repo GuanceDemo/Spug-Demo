@@ -15,4 +15,4 @@ else
   PYTHON=python
 fi
 
-exec ddtrace-run python3 manage.py runworker
+exec ddtrace-run $PYTHON manage.py runworker

@@ -4,15 +4,5 @@
 # Released under the AGPL-3.0 License.
 # start worker service
 
-cd $(dirname $(dirname $0))
-if [ -f ./venv/bin/activate ]; then
-  source ./venv/bin/activate
-fi
-
-if command -v python3 &> /dev/null; then
-  PYTHON=python3
-else
-  PYTHON=python
-fi
 
 exec ddtrace-run python3 manage.py runserver
