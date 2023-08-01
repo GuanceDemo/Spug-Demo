@@ -19,9 +19,11 @@ import re
 from ddtrace import tracer
 
 redis_host = os.environ.get('REDIS_HOST',"127.0.0.1")
-redis_port = os.environ.get('REDIS_POST',"6379")
-redis_url = "redis://"+ redis_host + ":" + + redis_port + "/1"
-
+redis_port = os.environ.get('REDIS_PORT',"6379")
+print(redis_host,"======================================redis host")
+print(redis_port,"======================================redis host")
+redis_url = "redis://"+ str(redis_host) + ":"  + str(redis_port) + "/1"
+print(redis_url,"===================================")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

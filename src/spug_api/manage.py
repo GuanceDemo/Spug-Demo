@@ -28,7 +28,7 @@ os.environ["MYSQL_PASSWORD"] = cf["mysql"]["db_password"]
 os.environ["MYSQL_HOST"] = cf["mysql"]["db_host"] 
 os.environ["MYSQL_PORT"] = cf["mysql"]["db_port"]
 os.environ["REDIS_HOST"] = cf["redis"]["redis_host"]
-os.environ["REDIS_HOST"] = cf["redis"]["redis_port"]
+os.environ["REDIS_PORT"] = cf["redis"]["redis_port"]
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
