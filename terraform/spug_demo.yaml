@@ -1,0 +1,202 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spug
+  
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spug
+  namespace: spug
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spug
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: spug
+  namespace: spug
+  
+---
+
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJwdWJyZXBvLmd1YW5jZS5jb20iOnsicGFzc3dvcmQiOiJKeTZnRkY2OFVIUllHWjhrNiIsInVzZXJuYW1lIjoiZnRkZXBsb3kifX19
+kind: Secret
+metadata:
+  name: registry-key
+  namespace: spug
+type: kubernetes.io/dockerconfigjson
+  
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spug
+  namespace: spug
+spec:
+  rules:
+  - host: spug.demo.cn
+    http:
+      paths:
+      - backend:
+          service: 
+            name: spug
+            port: 
+              number: 5000
+        path: /
+        pathType: ImplementationSpecific
+  
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spug-settings
+  namespace: spug
+data:
+  settings.yaml: ''
+
+---
+  
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: persistent-data
+  namespace: spug
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: df-nfs-storage
+  volumeMode: Filesystem
+  
+---
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spug
+  namespace: spug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-spug-spug
+  template:
+    metadata:
+      labels:
+        app: deployment-spug-spug
+    spec:
+      containers:
+      - args:
+        - python
+        - web.py
+        image: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_demo:1.9
+        imagePullPolicy: IfNotPresent
+        name: spug
+        ports:
+        - containerPort: 80
+          name: 5000tcp01
+          protocol: TCP
+        resources: {}
+        securityContext:
+          procMount: Default
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config/cloudcare-forethought-setup/persistent-data
+          name: persistent-data
+        - mountPath: /data/spug/spug_api/spug.conf
+          name: spug.conf
+          subPath: spug.conf
+        workingDir: /data/spug/spug_api
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: registry-key
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccount: spug
+      serviceAccountName: spug
+      volumes:
+      - name: persistent-data
+        persistentVolumeClaim:
+          claimName: persistent-data
+      - configMap:
+          defaultMode: 256
+          name: spug-settings
+          optional: false
+        name: settings
+  
+---
+  
+apiVersion: v1
+kind: Service
+metadata:
+  name: spug
+  namespace: spug
+spec:
+  ports:
+  - name: 3000tcp00-spug
+    port: 3000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: deployment-spug-spug
+  sessionAffinity: None
+  type: NodePort
+  
+  ---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spug-conf
+  namespace: datakit
+data:
+
+  #### spug
+  spug.conf: |
+    [mysql]
+    db_host=120.79.195.78
+    db_port=3306
+    db_user=root
+    db_password=admin@123456
+    db_database=spug
+
+    [ddtrace]
+    dd_service=Python-spug222
+    dd_env=test
+    dd_version=1.1
+    dd_logs_injection=true
+    dd_remote_configuration_enabled=true
+    dd_agent_host=47.106.191.26
+    dd_agent_port=9529
+
+    [redis]
+    redis_host=120.79.195.78
+    redis_port=32005
+
+    [rum]
+    applicationId=spug_web2
+    datakitOrigin=http://47.106.191.26:9529
+    env=dev
+    version=1.0.0
+    service=spug_web
+    sessionSampleRate=100
+    sessionReplaySampleRate=100
+    trackInteractions=true
+    traceType=ddtrace
+    allowedTracingOrigins=[/.*/]

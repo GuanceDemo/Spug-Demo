@@ -20,10 +20,7 @@ from ddtrace import tracer
 
 redis_host = os.environ.get('REDIS_HOST',"127.0.0.1")
 redis_port = os.environ.get('REDIS_PORT',"6379")
-print(redis_host,"======================================redis host")
-print(redis_port,"======================================redis host")
 redis_url = "redis://"+ str(redis_host) + ":"  + str(redis_port) + "/1"
-print(redis_url,"===================================")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -174,49 +171,49 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'info',
             'class': 'logging.StreamHandler',
             'formatter': 'default'
         },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
-            'when': "D",
-            'interval': 1,
-            'formatter': 'default'
-        },
-        "request": {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/request.log'),
-            'formatter': 'default'
-        },
-        "server": {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/server.log'),
-            'formatter': 'default'
-        },
-        "root": {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/root.log'),
-            'formatter': 'default'
-        },
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.handlers.TimedRotatingFileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+        #     'when': "D",
+        #     'interval': 1,
+        #     'formatter': 'default'
+        # },
+        # "request": {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/request.log'),
+        #     'formatter': 'default'
+        # },
+        # "server": {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/server.log'),
+        #     'formatter': 'default'
+        # },
+        # "root": {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/root.log'),
+        #     'formatter': 'default'
+        # },
  
-        "db_backends": {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
-            'formatter': 'default'
-        },
-        "autoreload": {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
-            'formatter': 'default'
-        }
+        # "db_backends": {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
+        #     'formatter': 'default'
+        # },
+        # "autoreload": {
+        #     'level': 'INFO',
+        #     'class': 'logging.FileHandler',
+        #     'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
+        #     'formatter': 'default'
+        # }
     },
     'loggers': {
         # 应用中自定义日志记录器
