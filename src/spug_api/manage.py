@@ -30,6 +30,18 @@ os.environ["MYSQL_PORT"] = cf["mysql"]["db_port"]
 os.environ["REDIS_HOST"] = cf["redis"]["redis_host"]
 os.environ["REDIS_PORT"] = cf["redis"]["redis_port"]
 
+# mysql环境变量
+os.environ["DATAKIT_ORIGIN"] = cf["rum"]["datakitOrigin"] 
+os.environ["RUM_ENV"] = cf["rum"]["env"] 
+os.environ["RUM_VERSION"] = cf["rum"]["version"] 
+os.environ["RUM_SERVICE"] = cf["rum"]["service"] 
+os.environ["SESSION_SAMPLE_RATE"] = cf["rum"]["sessionSampleRate"]
+os.environ["SESSION_REPLAY_SAMPLE_RATE"] = cf["rum"]["sessionReplaySampleRate"]
+os.environ["TRACK_INTERACTIONS"] = cf["rum"]["trackInteractions"]
+os.environ["TRACE_TYPE"] = cf["rum"]["traceType"]
+
+
+
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
           '- %(message)s')
