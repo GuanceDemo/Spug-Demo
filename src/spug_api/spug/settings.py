@@ -218,12 +218,12 @@ LOGGING = {
     'loggers': {
         # 应用中自定义日志记录器
         'mylogger': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'handlers': ['console', 'file'],
             'propagate': True,
         },
         "django": {
-            "level": "DEBUG",
+            "level": "INFO",
             "handlers": ["console", "file"],
             'propagate': False,
         },
@@ -238,7 +238,7 @@ LOGGING = {
             'propagate': False,
         },
         "django.db.backends": {
-            "level": "DEBUG",
+            "level": "INFO",
             "handlers": ["db_backends"],
             'propagate': False,
         },
