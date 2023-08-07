@@ -171,49 +171,49 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'info',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'default'
         },
-        # 'file': {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.handlers.TimedRotatingFileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
-        #     'when': "D",
-        #     'interval': 1,
-        #     'formatter': 'default'
-        # },
-        # "request": {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/request.log'),
-        #     'formatter': 'default'
-        # },
-        # "server": {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/server.log'),
-        #     'formatter': 'default'
-        # },
-        # "root": {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/root.log'),
-        #     'formatter': 'default'
-        # },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+            'when': "D",
+            'interval': 1,
+            'formatter': 'default'
+        },
+        "request": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/request.log'),
+            'formatter': 'default'
+        },
+        "server": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/server.log'),
+            'formatter': 'default'
+        },
+        "root": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/root.log'),
+            'formatter': 'default'
+        },
  
-        # "db_backends": {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
-        #     'formatter': 'default'
-        # },
-        # "autoreload": {
-        #     'level': 'INFO',
-        #     'class': 'logging.FileHandler',
-        #     'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
-        #     'formatter': 'default'
-        # }
+        "db_backends": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
+            'formatter': 'default'
+        },
+        "autoreload": {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
+            'formatter': 'default'
+        }
     },
     'loggers': {
         # 应用中自定义日志记录器
