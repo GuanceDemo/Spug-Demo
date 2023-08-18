@@ -1,0 +1,32 @@
+name: Python Package and Push to ACR
+
+on:
+  push:
+    branches:
+      - master
+#    paths:
+#      - 'src/**'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: https://registry.cn-shenzhen.aliyuncs.com
+          username: "${{ secrets.ACR_USERNAME }}"
+          password: "${{ secrets.ACR_PASSWORD }}"
+        
+      - name: Build and Push Docker Image Spug
+        uses: docker/build-push-action@v3
+        with:
+          context: ./src/docs/docker
+          file: ./src/docs/docker/Dockerfile
+          push: true
+          tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_demo:${{ github.sha }}
+          registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_demo
