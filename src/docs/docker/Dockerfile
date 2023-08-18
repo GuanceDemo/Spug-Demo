@@ -48,4 +48,4 @@ RUN echo -e '\n# Source definitions\n. /etc/profile\n' >> /root/.bashrc
 
 VOLUME /data
 EXPOSE 80
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/data/spug/spug_api/tools/start-server.sh"]
