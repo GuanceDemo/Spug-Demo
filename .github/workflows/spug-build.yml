@@ -22,7 +22,7 @@ jobs:
           username: "${{ secrets.ACR_USERNAME }}"
           password: "${{ secrets.ACR_PASSWORD }}"
         
-      - name: Build and Push Docker Image Spug-server
+      - name: Build and Push Docker Image Spug-server-1
         uses: docker/build-push-action@v3
         with:
           context: ./src/spug_api/
@@ -31,7 +31,7 @@ jobs:
           tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo:${{ github.sha }}
           registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo
 
-      - name: Build and Push Docker Image Spug-web
+      - name: Build and Push Docker Image Spug-web-1
         uses: docker/build-push-action@v3
         with:
           context: ./src/spug_web/
