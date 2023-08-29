@@ -25,8 +25,8 @@ jobs:
       - name: Build and Push Docker Image Spug-server
         uses: docker/build-push-action@v3
         with:
-          context: ./spug_api/
-          file: ./Dockerfile
+          context: ./src/spug_api/
+          file: ./src/spug_api/Dockerfile
           push: true
           tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo:${{ github.sha }}
           registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo
@@ -34,8 +34,8 @@ jobs:
       - name: Build and Push Docker Image Spug-web
         uses: docker/build-push-action@v3
         with:
-          context: ./apig_web/
-          file: ./Dockerfile
+          context: ./src/apig_web/
+          file: ./src/spug_api/Dockerfile
           push: true
           tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_web_demo:${{ github.sha }}
           registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_web_demo
