@@ -26,7 +26,8 @@ COPY ./nginx.conf /data/spug/spug_web/
 COPY ./package-lock.json /data/spug/spug_web/
 COPY ./package.json/ /data/spug/spug_web/
 
-RUN cd /data/spug/spug_web/ && npm run build
+RUN cd /data/spug/spug_web/ 
+RUN npm run build
 COPY ./build/ /data/spug/spug_web/build
 COPY ./nginx.conf /etc/nginx/
 VOLUME /data
