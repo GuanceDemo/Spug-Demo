@@ -21,18 +21,18 @@ const rum_env = process.env.RUM_ENV;
 const rum_version = process.env.RUM_VERSION;
 const rum_service = process.env.RUM_SERVICE;
 const sessionSampleRate = process.env.SESSION_SAMPLE_RATE;
-const SESSION_REPLAY_SAMPLE_RATE = process.env.sessionReplaySampleRate;
+const sessionReplaySampleRate = process.env.SESSION_REPLAY_SAMPLE_RATE;
 const trackInteractions = process.env.TRACK_INTERACTIONS;
 const traceType = process.env.TRACE_TYPE;
 
 datafluxRum.init({
     applicationId: 'spug_web',
-    datakitOrigin: datakitOrigin, // 协议（包括：//），域名（或IP地址）[和端口号]
-    env: rum_env,
-    version: rum_version,
-    service: rum_service,
-    sessionSampleRate: sessionSampleRate,
-    sessionReplaySampleRate: SESSION_REPLAY_SAMPLE_RATE,
+    datakitOrigin: 'http://47.106.191.26:9529',// datakitOrigin,
+    env: 'dev' , //rum_env,
+    version: '1.0',//rum_version,
+    service: 'spug-web', //rum_service,
+    sessionSampleRate: 100, //sessionSampleRate,
+    sessionReplaySampleRate: 100,//sessionReplaySampleRate,
     trackInteractions: true,
     traceType: traceType, // 非必填，默认为ddtrace，目前支持 ddtrace、zipkin、skywalking_v3、jaeger、zipkin_single_header、w3c_traceparent 6种类型
     allowedTracingOrigins: [/.*/],  // 非必填，允许注入trace采集器所需header头部的所有请求列表。可以是请求的origin，也可以是是正则

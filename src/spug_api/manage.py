@@ -5,7 +5,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from ddtrace import tracer
+from ddtrace import patch,tracer
 import logging
 import os
 from configparser import ConfigParser
@@ -41,7 +41,7 @@ os.environ["TRACK_INTERACTIONS"] = cf["rum"]["trackInteractions"]
 os.environ["TRACE_TYPE"] = cf["rum"]["traceType"]
 
 
-
+patch(logging=True)
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
           '- %(message)s')

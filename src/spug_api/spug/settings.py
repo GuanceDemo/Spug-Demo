@@ -17,6 +17,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import re
 from ddtrace import tracer
+import logging
 
 redis_host = os.environ.get('REDIS_HOST',"127.0.0.1")
 redis_port = os.environ.get('REDIS_PORT',"6379")
@@ -146,11 +147,95 @@ except ImportError:
     pass
 
 
+# FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+#           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+#           '- %(message)s')
+# logging.basicConfig(level=logging.INFO,format=FORMAT)
+
+# 日志配置
+
+
+# #1、配置日志要保存的文件夹，创建文件夹
+# import time
+# BASE_LOG_DIR = os.path.join(BASE_DIR, 'logs')
+# error_path = os.path.join(BASE_DIR,'error')
+# if not os.path.exists(error_path):
+#     #如果logs/error/不存在，递归创建目录
+#     os.makedirs(error_path)
+ 
+# all_path = os.path.join(BASE_LOG_DIR,'all')
+# if not os.path.exists(all_path):
+#     #如果logs/all/目录不存在，就递归创建(如果logs目录不存在，也会创建)
+#     os.makedirs(all_path)
+
+
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
           '- %(message)s')
 
-# 日志配置
+logging.basicConfig(level=logging.INFO,format=FORMAT)
+
+# #2、相关的日志配置
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,  # 设置已存在的logger不失效
+#     'filters': {
+#     },
+#     'formatters': {
+#         'standard': {
+#             'format': FORMAT,
+#             'datefmt': '%Y-%m-%d %H:%M:%S'
+#         },
+#         'simple': {
+#             'format': '[%(asctime)s][%(levelname)s]：%(message)s',
+#             'datefmt': '%Y-%m-%d %H:%M:%S'
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'file': { #按照文件大小分割日志，将所有的日志信息都保存在这里
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': os.path.join(BASE_LOG_DIR,'all', 'debug.log'),
+#             'maxBytes': 1024 * 1024 * 50,  # 日志大小50M
+#             'backupCount': 5,
+#             'formatter': 'standard',
+#             'encoding': 'utf-8',
+#         },
+#         'time_file':{#按照时间分割日志，每周一新增一个日志文件，存error等级以上的日志
+#               'level': 'INFO',#日志的等级
+#               'class': 'logging.handlers.TimedRotatingFileHandler',
+#               'filename': os.path.join(BASE_LOG_DIR,'error',f"{time.strftime('%Y-%m-%d')}.log"),#日志的文件名
+#               'when': 'D', #时间单位，M,H,D,'W0'(星期1),'W6'（星期天）
+#               'interval': 1,
+#               'backupCount': 5, #备份数量
+#               'formatter': 'standard', #使用的日志格式
+#               'encoding': 'utf-8',
+#         }
+ 
+#     },
+#     'loggers': {
+#         #INFO以上日志，打印在console，也写到以文件大小分割的日志中
+#         'django': {
+#             'handlers': ['console','file'],#handlers中存在的配置
+#             'level': 'INFO',
+#             'propagate': True
+#         },
+#         #error以上的日志写到按时间分割的日志文件中，同时打印在控制台
+#         'django.request': {
+#             'handlers': ['console','time_file'],#handlers中存在的配置
+#             'level': 'ERROR',
+#             'propagate': True
+#         },
+ 
+#     },
+# }
+
+
 
 LOGGING = {
     'version': 1,
@@ -171,12 +256,12 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'default'
         },
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
             'when': "D",
@@ -184,72 +269,35 @@ LOGGING = {
             'formatter': 'default'
         },
         "request": {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/request.log'),
             'formatter': 'default'
         },
         "server": {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/server.log'),
             'formatter': 'default'
         },
         "root": {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/root.log'),
             'formatter': 'default'
         },
  
         "db_backends": {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/db_backends.log'),
             'formatter': 'default'
         },
         "autoreload": {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
             'formatter': 'default'
         }
-    },
-    'loggers': {
-        # 应用中自定义日志记录器
-        'mylogger': {
-            'level': 'INFO',
-            'handlers': ['console', 'file'],
-            'propagate': True,
-        },
-        "django": {
-            "level": "INFO",
-            "handlers": ["console", "file"],
-            'propagate': False,
-        },
-        "django.request": {
-            "level": "DEBUG",
-            "handlers": ["request"],
-            'propagate': False,
-        },
-        "django.server": {
-            "level": "DEBUG",
-            "handlers": ["server"],
-            'propagate': False,
-        },
-        "django.db.backends": {
-            "level": "INFO",
-            "handlers": ["db_backends"],
-            'propagate': False,
-        },
-        "django.utils.autoreload": {
-            "level": "INFO",
-            "handlers": ["autoreload"],
-            'propagate': False,
-        }
-    },
-    'root': {
-        "level": "DEBUG",
-        "handlers": ["root"],
     }
 }
