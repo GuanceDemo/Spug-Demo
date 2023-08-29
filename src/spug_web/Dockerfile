@@ -17,7 +17,7 @@ RUN echo -e '\n# Source definitions\n. /etc/profile\n' >> /root/.bashrc
 RUN rm -rf ./build/
 
 # RUN npm install
-COPY ./node_modules/ /data/spug/spug_web/node_modules
+#COPY ./node_modules/ /data/spug/spug_web/node_modules
 COPY ./public/ /data/spug/spug_web/public
 COPY ./src/ /data/spug/spug_web/src
 COPY ./jsconfig.json /data/spug/spug_web/
@@ -27,10 +27,8 @@ COPY ./package-lock.json /data/spug/spug_web/
 COPY ./package.json /data/spug/spug_web/
 
 RUN cd /data/spug/spug_web/ 
-RUN npm install -g npm@9.8.1
-RUN ls
+#RUN npm install -g npm@9.8.1
 RUN npm run build
-RUN ls
 #COPY ./build /data/spug/spug_web/build
 COPY ./nginx.conf /etc/nginx/
 VOLUME /data
