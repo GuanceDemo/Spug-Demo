@@ -24,11 +24,14 @@ COPY ./jsconfig.json /data/spug/spug_web/
 COPY ./config-overrides.js /data/spug/spug_web/
 COPY ./nginx.conf /data/spug/spug_web/
 COPY ./package-lock.json /data/spug/spug_web/
-COPY ./package.json/ /data/spug/spug_web/
+COPY ./package.json /data/spug/spug_web/
 
 RUN cd /data/spug/spug_web/ 
+RUN npm install -g npm@9.8.1
+RUN ls
 RUN npm run build
-COPY ./build/ /data/spug/spug_web/build
+RUN ls
+#COPY ./build /data/spug/spug_web/build
 COPY ./nginx.conf /etc/nginx/
 VOLUME /data
 EXPOSE 80
