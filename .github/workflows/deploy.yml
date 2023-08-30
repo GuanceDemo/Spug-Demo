@@ -21,4 +21,4 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           echo "47.106.139.53 apiserver.cluster.local" | sudo tee -a /etc/hosts
-          helm upgrade -i spug-server  --create-namespace --namespace spug ./spug-helm
+          helm upgrade -i spug-server  --create-namespace --namespace spug ./helm
