@@ -28,6 +28,7 @@ COPY ./package.json /data/spug/spug_web/
 
 RUN cd /data/spug/spug_web/ 
 #RUN npm install -g npm@9.8.1
+RUN npm install
 RUN npm run build
 #COPY ./build /data/spug/spug_web/build
 COPY ./nginx.conf /etc/nginx/
