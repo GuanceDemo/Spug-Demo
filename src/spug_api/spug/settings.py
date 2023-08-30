@@ -299,5 +299,43 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/autoreload.log'),
             'formatter': 'default'
         }
+    },
+    'loggers': {
+        # 应用中自定义日志记录器
+        'mylogger': {
+            'level': 'INFO',
+            'handlers': ['console', 'file'],
+            'propagate': True,
+        },
+        "django": {
+            "level": "INFO",
+            "handlers": ["console", "file"],
+            'propagate': False,
+        },
+        "django.request": {
+            "level": "INFO",
+            "handlers": ["console","request"],
+            'propagate': False,
+        },
+        "django.server": {
+            "level": "INFO",
+            "handlers": ["console","server"],
+            'propagate': False,
+        },
+        "django.db.backends": {
+            "level": "INFO",
+            "handlers": ["db_backends"],
+            'propagate': False,
+        },
+        "django.utils.autoreload": {
+            "level": "INFO",
+            "handlers": ["console","autoreload"],
+            'propagate': False,
+        }
+    },
+    'root': {
+        "level": "DEBUG",
+        "handlers": ["console","root"],
     }
+
 }
