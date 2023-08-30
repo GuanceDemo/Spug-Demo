@@ -51,13 +51,7 @@ RUN pip3 install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ \
 RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
-
-
-
 RUN echo -e '\n# Source definitions\n. /etc/profile\n' >> /root/.bashrc
-
-
-
 
 VOLUME /data
 EXPOSE 80
