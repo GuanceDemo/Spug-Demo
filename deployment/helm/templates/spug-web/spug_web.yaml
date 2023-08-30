@@ -25,7 +25,7 @@ spec:
         - '-c'
         - /etc/nginx/nginx.conf
         image: {{ .Values.global.docker_registry }}/{{ .Values.global.docker_namespace }}/spug_web_demo:{{ .Values.global.version }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: spug-web
         ports:
         - containerPort: 80
