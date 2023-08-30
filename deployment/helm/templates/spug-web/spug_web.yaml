@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spug-web
+  namespace: spug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-spug-spug-web
+  template:
+    metadata:
+      labels:
+        app: deployment-spug-spug-web
+    spec:
+      volumes:
+      - configMap:
+          name: nginx-conf
+        name: nginx-conf
+      containers:
+      - args:
+        - 'nginx'
+        - '-g daemon off;'
+        - '-c'
+        - /etc/nginx/nginx.conf
+        image: {{ .Values.global.docker_registry }}/{{ .Values.global.docker_namespace }}/spug_web_demo:{{ .Values.global.version }}
+        imagePullPolicy: IfNotPresent
+        name: spug-web
+        ports:
+        - containerPort: 80
+          name: 80tcp01
+          protocol: TCP
+        resources: {}
+        securityContext:
+          procMount: Default
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginx-conf
+          subPath: nginx.conf
+        workingDir: /etc/nginx
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: registry-key
+      restartPolicy: Always
+
+

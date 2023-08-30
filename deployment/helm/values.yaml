@@ -1,0 +1,41 @@
+global:
+  version: latest
+  domain: sz-test_1.com
+  docker_registry: pubrepo.guance.com
+  docker_namespace: demo
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+spug-web:
+  prefix: spug-server-demo
+  env: prod
+  version: "1.0"
+  ingress_enable: true
+  backend:
+    image: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_web_demo:2.0
+
+  front:
+    applicationId: unset
+    allowedTracingOrigins: unset
+
+spug-server:
+  prefix: spug-web-demo
+  env: prod
+  version: "1.0"
+  ingress_enable: true
+  backend:
+    image: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo:2.1
+
+  front:
+    applicationId: unset
+    allowedTracingOrigins: unset
+
+
+
+middleware:
+  storageClass: df-nfs-storage

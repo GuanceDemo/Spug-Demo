@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spug-conf
+  namespace: spug
+data:
+  #### spug
+  spug.conf: |-
+    [mysql]
+    db_host=120.79.195.78
+    db_port=3306
+    db_user=root
+    db_password=admin@123456
+    db_database=spug
+
+    [ddtrace]
+    dd_service=python-spug-demo
+    dd_env=test
+    dd_version=1.1
+    dd_logs_injection=true
+    dd_remote_configuration_enabled=true
+    dd_agent_host=47.106.191.26
+    dd_agent_port=9529
+
+    [redis]
+    redis_host=120.79.195.78
+    redis_port=32005
+
+    [rum]
+    applicationId=spug_web2
+    datakitOrigin=http://47.106.191.26:9529
+    env=dev
+    version=1.0.0
+    service=spug_web
+    sessionSampleRate=100
+    sessionReplaySampleRate=100
+    trackInteractions=true
+    traceType=ddtrace
+    allowedTracingOrigins=[/.*/]
+
