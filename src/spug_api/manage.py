@@ -13,7 +13,7 @@ from configparser import ConfigParser
 cf = ConfigParser()
 cf.read("spug.conf")
 # ddtrace环境变量
-os.environ["DD_SERVICE"] = cf["ddtrace"]["dd_service"]   # 设置服务名
+os.environ["DD_SERVICE"] = cf["ddtrace"]["dd_service"]   # 设置服务名 1
 os.environ["DD_ENV"] =  cf["ddtrace"]["dd_env"]           # 设置环境名
 os.environ["DD_VERSION"] = cf["ddtrace"]["dd_env"]          # 设置版本号
 os.environ["DD_LOGS_INJECTION"] = cf["ddtrace"]["dd_logs_injection"]  # 开启log注入22222
