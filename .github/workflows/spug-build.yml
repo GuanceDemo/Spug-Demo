@@ -14,28 +14,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Login to ACR
-        uses: aliyun/acr-login@v1
-        with:
-          login-server: https://registry.cn-shenzhen.aliyuncs.com
-          username: "${{ secrets.ACR_USERNAME }}"
-          password: "${{ secrets.ACR_PASSWORD }}"
         
-      - name: Build and Push Docker Image Spug-server-1
-        uses: docker/build-push-action@v3
+      - name: Log in to the Docker registry
+        uses: docker/login-action@v2
         with:
-          context: ./src/spug_api/
-          file: ./src/spug_api/Dockerfile
-          push: true
-          tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo:${{ github.sha }}
-          registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_server_demo
+          registry: ${{ vars.DOCKER_REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Image Spug-web-1
-        uses: docker/build-push-action@v3
+      - name: Build and push spug_demo images
+        uses: docker/build-push-action@v3.3.1
+        with:
+          context: ./src/spug_server/
+          file: ./src/spug_server/Dockerfile
+          push: true
+          tags: |
+            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/spug_server_demo:${{ github.sha }}
+            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/spug_server_demo:latest
+
+
+      - name: Build and push spug_web images
+        uses: docker/build-push-action@v3.3.1
         with:
           context: ./src/spug_web/
           file: ./src/spug_web/Dockerfile
           push: true
-          tags: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_web_demo:${{ github.sha }}
-          registry: registry.cn-shenzhen.aliyuncs.com/guance-south/spug_web_demo
+          tags: |
+            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/spug_web_demo:${{ github.sha }}
+            ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/spug_web_demo:latest
