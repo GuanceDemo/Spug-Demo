@@ -85,7 +85,7 @@ CACHES = {
         "LOCATION": redis_url ,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PAASSWORD": redis_pwd
+            "PASSWORD": "viFRKZiZkoPmXnyF"
         }
     }
 }

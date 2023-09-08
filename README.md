@@ -21,7 +21,7 @@ helm upgrade -i spug-server  --create-namespace --namespace spug ./deployment/he
 ```
 
 #### 1.2 访问方式
-部署完成后可通过 gvb-front 的 NodePort 方式进行访问，默认端口为 30003
+部署完成后可通过 spug 的 NodePort 方式进行访问，默认端口为 30003
 - 控制台页面：\<spug-node-ip>:30003
   -  账号：admin
   - 密码：admin
@@ -70,7 +70,7 @@ New repository Variable
 - `Deploy spug demo on kubernetes`: CD 流水线
 
 ### 5. 访问方式
-部署完成后可通过 gvb-front 的 NodePort 方式进行访问，默认端口为 30003
+部署完成后可通过 spug 的 NodePort 方式进行访问，默认端口为 30003
 - 控制台页面：\<spug-node-ip>:30003
   -  账号：admin
   - 密码：admin
