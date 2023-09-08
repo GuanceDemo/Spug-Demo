@@ -13,7 +13,24 @@
 # echo "export DD_VERSION=1.1" >> ~/.bashrc
 # echo "export DD_REMOTE_CONFIGURATION_ENABLED='true'" >> ~/.bashrc
 
-# source ~/.bashrc
+# 设置MySQL数据库的相关信息
+DB_NAME="spug"
+DB_USER="root"
+DB_PASSWORD="admin@123456"
+
+# 检查数据库是否存在
+database_exists=$(mysql -u $DB_USER -p$DB_PASSWORD -e "SHOW DATABASES LIKE '$DB_NAME';" | grep "$DB_NAME")
+
+if [ -z "$database_exists" ]; then
+    # 如果数据库不存在，则创建数据库
+    echo "Creating database $DB_NAME..."
+    mysql -u $DB_USER -p$DB_PASSWORD -e "CREATE DATABASE $DB_NAME;"
+    echo "Database $DB_NAME created successfully!"
+else
+    echo "Database $DB_NAME already exists."
+fi
+
+
 
 mysql -h mysql.spug -u root -padmin@123456 -e "CREATE DATABASE spug;"
 
