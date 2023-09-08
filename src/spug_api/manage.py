@@ -21,7 +21,7 @@ os.environ["DD_REMOTE_CONFIGURATION_ENABLED"] = cf["ddtrace"]["dd_remote_configu
 os.environ["DD_AGENT_HOST"] = cf["ddtrace"]["dd_agent_host"]   #datakit host
 os.environ["DD_AGENT_PORT"] = cf["ddtrace"]["dd_agent_port"]  #datakit portdadassssss
 
-# mysql环境变量
+# mysql/redis环境变量
 os.environ["MYSQL_DATABASE"] = cf["mysql"]["db_database"] 
 os.environ["MYSQL_USER"] = cf["mysql"]["db_user"] 
 os.environ["MYSQL_PASSWORD"] = cf["mysql"]["db_password"] 
@@ -29,8 +29,10 @@ os.environ["MYSQL_HOST"] = cf["mysql"]["db_host"]
 os.environ["MYSQL_PORT"] = cf["mysql"]["db_port"]
 os.environ["REDIS_HOST"] = cf["redis"]["redis_host"]
 os.environ["REDIS_PORT"] = cf["redis"]["redis_port"]
+os.environ["REDIS_PASSWORD"] = cf["redis"]["redis_password"]
 
-# mysql环境变量
+
+# rum环境变量
 os.environ["DATAKIT_ORIGIN"] = cf["rum"]["datakitOrigin"] 
 os.environ["RUM_ENV"] = cf["rum"]["env"] 
 os.environ["RUM_VERSION"] = cf["rum"]["version"] 

@@ -11,7 +11,7 @@ spec:
     port: 8000
     protocol: TCP
     targetPort: 8000
-    nodePort: 30008
+    nodePort: 31008
   selector:
     app: deployment-spug-spug-server
   sessionAffinity: None

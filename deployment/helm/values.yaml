@@ -1,5 +1,6 @@
 global:
   version: latest
+  storageClass: manual
   domain: sz-test_1.com
   docker_registry: pubrepo.guance.com
   docker_namespace: demo
