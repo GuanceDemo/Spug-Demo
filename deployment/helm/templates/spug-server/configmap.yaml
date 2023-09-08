@@ -8,7 +8,7 @@ data:
   #### spug
   spug.conf: |-
     [mysql]
-    db_host=120.79.195.78
+    db_host=mysql.spug
     db_port=3306
     db_user=root
     db_password=admin@123456
@@ -24,8 +24,9 @@ data:
     dd_agent_port=9529
 
     [redis]
-    redis_host=120.79.195.78
-    redis_port=32005
+    redis_host=redis.spug
+    redis_port=6379
+    redis_password=viFRKZiZkoPmXnyF
 
     [rum]
     applicationId=spug_web2
