@@ -1,4 +1,4 @@
-name: Python Package and Push to ACR
+name: Python ui Package and Push to ACR
 
 on:
   push:

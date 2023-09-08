@@ -1,4 +1,4 @@
-name: Python Package and Push to ACR
+name: Python backend Package and Push to ACR
 
 on:
   push:
