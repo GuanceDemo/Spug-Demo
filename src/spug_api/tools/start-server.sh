@@ -4,14 +4,18 @@
 # Released under the AGPL-3.0 License.
 # start worker service
 
-# echo "export DD_SERVICE=python-spug" >> ~/.bashrc
-# echo "export DD_TAGS=project:mobie_sdk_demo,env:test,version:1.0" >> ~/.bashrc
-# #echo "export DD_AGENT_HOST=https://pe-dk.guance.space" >> ~/.bashrc
-# echo "export DD_AGENT_HOST=47.106.191.26" >> ~/.bashrc
-# echo "export DD_AGENT_PORT=9529" >> ~/.bashrc
-# echo "export DD_LOGS_INJECTION='true'" >> ~/.bashrc
-# echo "export DD_VERSION=1.1" >> ~/.bashrc
-# echo "export DD_REMOTE_CONFIGURATION_ENABLED='true'" >> ~/.bashrc
+echo "export DD_SERVICE=python-spug" >> ~/.bashrc
+echo "export DD_TAGS=project:mobie_sdk_demo,env:test,version:1.0" >> ~/.bashrc
+#echo "export DD_AGENT_HOST=https://pe-dk.guance.space" >> ~/.bashrc
+echo "export DD_AGENT_HOST=47.106.191.26" >> ~/.bashrc
+echo "export DD_AGENT_PORT=9529" >> ~/.bashrc
+echo "export DD_LOGS_INJECTION='true'" >> ~/.bashrc
+echo "export DD_VERSION=1.1" >> ~/.bashrc
+echo "export DD_REMOTE_CONFIGURATION_ENABLED='true'" >> ~/.bashrc
+echo "export REDIS_HOST=mysql.spug" >> ~/.bashrc
+echo "export REDIS_PORT=6379" >> ~/.bashrc
+echo "export REDIS_PASSWORD=viFRKZiZkoPmXnyF" >> ~/.bashrc
+source  ~/.bashrc
 
 # 设置MySQL数据库的相关信息
 DB_NAME="spug"

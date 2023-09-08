@@ -7,8 +7,8 @@ DATABASES = {
         'NAME': 'spug',             # 替换为自己的数据库名，请预先创建好编码为utf8mb4的数据库
         'USER': 'root',        # 数据库用户名
         'PASSWORD': 'admin@123456',  # 数据库密码
-        'HOST': '47.106.139.53',        # 数据库地址
-        'PORT':'32004',
+        'HOST': 'mysql.spug',        # 数据库地址
+        'PORT':'3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
             'sql_mode': 'STRICT_TRANS_TABLES',
