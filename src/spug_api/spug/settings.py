@@ -22,7 +22,7 @@ import logging
 redis_host = os.environ.get('REDIS_HOST',"127.0.0.1")
 redis_port = os.environ.get('REDIS_PORT',"6379")
 redis_url = "redis://"+ str(redis_host) + ":"  + str(redis_port) + "/1"
-redis_pwd = if not os.environ.get('REDIS_PASSWORD',"viFRKZiZkoPmXnyF") else viFRKZiZkoPmXnyF
+redis_pwd = os.environ.get('REDIS_PASSWORD',"viFRKZiZkoPmXnyF")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -36,7 +36,7 @@ helm uninstall spug-server -n spug
 ***
 
 ## 方式二：自动化打包部署
-> 通过 Github Action 自动打包并安装至 Kubernetes 集群，适合对 guance-go-ginvueblog-demo 源码修改的场景。
+> 通过 Github Action 自动打包并安装至 Kubernetes 集群，适合对 guance-python-spug-demo 源码修改的场景。
 
 ### 1. fork 代码到自己的 Github 仓库
 
@@ -62,19 +62,18 @@ New repository Variable
 
 自动打包流水线会自动打包 Gin-Vue-Blog 的前端和后端镜像并推送至镜像仓库, 可通过修改 src 下任意文件或手动方式进行触发。
 
-- `Build and push gvb ui demo images`: 前端 CI 流水线
-- `Build and push gvb backend demo images`: 后端 CI 流水线
+- `Python ui Package and Push to ACR`: 前端 CI 流水线
+- `Python backend Package and Push to ACR`: 后端 CI 流水线
 
 ### 4. 触发自动部署流水线 
 自动部署流水线通过手动触发进行部署。
-- `Deploy gvb demo on kubernetes`: CD 流水线
+- `Deploy spug demo on kubernetes`: CD 流水线
 
 ### 5. 访问方式
-部署完成后可通过 gvb-front 的 NodePort 方式进行访问，默认端口为 30002
-- 博客系统页面：\<gvb-front-node-ip>:30002
-- 博客后台页面: \<gvb-front-node-ip>:30002/admin
+部署完成后可通过 gvb-front 的 NodePort 方式进行访问，默认端口为 30003
+- 控制台页面：\<spug-node-ip>:30003
   -  账号：admin
-  - 密码：123456
+  - 密码：admin
 
 ### 6. 卸载
 destroy 进行卸载
