@@ -27,7 +27,7 @@ const traceType = process.env.TRACE_TYPE;
 
 datafluxRum.init({
     applicationId: 'spug_web',
-    datakitOrigin: 'http://47.106.191.26:9529',// datakitOrigin,
+    datakitOrigin: '/rum',// datakitOrigin,
     env: 'dev' , //rum_env,
     version: '1.0',//rum_version,
     service: 'spug-web', //rum_service,
